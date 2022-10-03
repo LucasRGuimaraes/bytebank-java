@@ -2,6 +2,16 @@ public class Fluxo {
 
     public static void main(String[] args) {
         System.out.println("Ini do main");
+<<<<<<< HEAD
+=======
+        try {
+			
+		} catch (ArithmeticException | NullPointerException ex) {
+			String msg = ex.getMessage();
+			System.out.println("Exception " + msg);
+			ex.printStackTrace();
+		}
+>>>>>>> de9e2112bf9505e5352cd161654f3b84051bb30f
         metodo1();
         System.out.println("Fim do main");
     }
