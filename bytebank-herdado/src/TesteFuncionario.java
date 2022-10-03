@@ -1,14 +1,23 @@
 
 public class TesteFuncionario {
+
 	public static void main(String[] args) {
 		
-		Funcionario lucas = new Gerente();
 		
-		lucas.setNome("Lucas");
-		lucas.setCpf("145.567.895-46");
-		lucas.setSalario(50000.0);
+		Cliente cliente = new Cliente();
 		
-		System.out.println(lucas.getNome());
-		System.out.println(lucas.getBonificacao());
+		
+		
+		Gerente nico = new Gerente();
+		nico.setNome("Nico Steppat");
+		nico.setCpf("223355646-9");
+		nico.setSalario(2600.00);
+
+		System.out.println(nico.getNome());
+		System.out.println(nico.getBonificacao());
+		
+		//nico.salario = 300.0;
+		
 	}
+
 }
