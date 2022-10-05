@@ -97,4 +97,12 @@ public abstract class Conta extends Object {
 		return "Numero: " + this.numero + ", Agencia: " + this.agencia;
 	}
 
+	public boolean ehIgual(Conta conta) {
+		if(conta.getNumero() == this.numero && conta.getAgencia() == this.agencia) {
+			return true; 
+		} else {
+			return false;
+		}
+	}
+
 }
