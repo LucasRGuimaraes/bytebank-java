@@ -4,29 +4,29 @@ Desafio Java OO
 Uma lanchonete deseja um sistema para controlar as vendas.
 O sistema deve conter os seguintes menus: 
 
-1 - Cadastrar Novos Produtos
+- 1 - Cadastrar Novos Produtos
   - Tres classes Salgado Frito, Salgado Assado, Refresco. (Usar Herança, ou seja Produto é o pai que tem tres atributos, id, nome e valor)
   - Ao selecionar esse opcao vai perguntar qual o tipo (Salgado Frito, Salgado Assado, Refresco) que deseja ser cadastrado.
 
-2 - Listar Produtos
+- 2 - Listar Produtos
   - Listar na seguinte forma ID, TIPO, NOME, VALOR
 
-3 - Alterar Produto pelo ID
+- 3 - Alterar Produto pelo ID
 
-4 - Deletar Produto pelo ID
+- 4 - Deletar Produto pelo ID
 
-5 - Cadastrar Cliente
+- 5 - Cadastrar Cliente
   - Numero da Mesa, Nome
 
-6 - Cadastrar Novo Pedido Cliente
+- 6 - Cadastrar Novo Pedido Cliente
   - Pedir o numero da mesa
   - Pedir qual o tipo de produto que deseja (Salgado Frito, Salgado Assado, Refresco)
   - Listar as opcoes
   - Esperar pela entrada do id do produto
 
-7 - Listar contas abertas e subtotal por enquanto
+- 7 - Listar contas abertas e subtotal por enquanto
 
-8 - Fechar Conta Cliente
+- 8 - Fechar Conta Cliente
   - Pedir numero da mesa
   - Listar todos os produtos consumidos
   - Total com 10%
