@@ -1,26 +1,25 @@
 package br.com.bytebank.banco.modelo;
 
 public class GuardadorDeContas {
-
 	
-	private Object[] referencias;
+	private Conta[] referencias;
 	private int posicaoLivre;
 	
 	public GuardadorDeContas() {
-		this.referencias = new Object[10];
+		this.referencias = new Conta[10];
 		this.posicaoLivre = 0;
 	}
 	
-	public void adiciona(Object conta) {
-		this.referencias[this.posicaoLivre] = conta;
+	public void adiciona(Conta ref) {
+		this.referencias[this.posicaoLivre] = ref;
 		this.posicaoLivre++;
 	}
 
 	public int getQuantidadeDeElementos() {
-		return posicaoLivre;
+		return this.posicaoLivre;
 	}
 
-	public Object getReferencia(int posicao) {
-		return this.referencias[posicao];
+	public Conta getReferencia(int pos) {
+		return this.referencias[pos];
 	}
 }
