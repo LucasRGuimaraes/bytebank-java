@@ -22,8 +22,7 @@ public class Executador {
 			case 1:
 				// cadastrar produto
 				System.out.println("ta indo");
-				produtoService.cadastrarProduto(view.getTipoProduto(scanner), view.getNomeProduto(scanner),
-						view.getValorProduto(scanner));
+				produtoService.cadastrarProduto(view.getInformacoesProduto(scanner));
 				break;
 			default:
 				break;

@@ -2,14 +2,15 @@ package br.com.restaurante.service;
 
 import br.com.restaurante.database.SingletonDB;
 import br.com.restaurante.modelo.SalgadoFrito;
+import br.com.restaurante.modelo.dto.ProdutoDTO;
 
 public class ProdutoService {
 	
 	SingletonDB db = SingletonDB.getInstance();
 
-	public void cadastrarProduto(Integer tipo, String nome, Double valor) {
+	public void cadastrarProduto(ProdutoDTO produtoDTO) {
 		
-		switch (tipo) {
+		switch (produtoDTO.getTipo()) {
 		case 1:
 			new SalgadoFrito(tipo, nome, valor);
 			break;
