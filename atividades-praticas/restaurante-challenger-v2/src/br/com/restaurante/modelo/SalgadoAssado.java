@@ -6,4 +6,9 @@ public class SalgadoAssado extends Produto {
 		super(id, nome, valor);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("%10s%20s%10s%20s", super.getId(), "SALGADO ASSADO", super.getNome(), super.getValor());
+	}
+
 }
