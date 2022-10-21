@@ -1,10 +1,10 @@
 package br.com.restaurante.database;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -36,31 +36,33 @@ public class SingletonDB {
 
 	public void loadProdutos() {
 		try {
-			String dados = new String(Files.readAllBytes(new File(
-					"C:\\Users\\LucasGuimaraes\\Workspace\\Estudos\\Java\\atividades-praticas\\restaurante-challenger-v2\\src\\produtos.csv")
-					.toPath()));
-			String[] rows = dados.split("\r\n");
-			Arrays.asList(rows).forEach(row -> {
-				String[] category = row.split("\\|\\|");
-				String id = category[0];
-				String type = category[1];
-				String name = category[2];
-				String price = category[3];
+			Files.lines(Paths.get(
+					"C:\\Users\\LucasGuimaraes\\Workspace\\Estudos\\Java\\atividades-praticas\\restaurante-challenger-v2\\src\\produtos.csv"))
+					.map(line -> line.split("\\|\\|"))
+					.forEach(category -> {
+						String id = category[0];
+						String type = category[1];
+						String name = category[2];
+						String price = category[3];
+						Produto produto = null;
 
-				Produto produto = null;
+						if (type.equals(SalgadoFrito.class.getSimpleName())) {
+							produto = new SalgadoFrito(Integer.parseInt(id), name,
+									Double.parseDouble(price));
+						} else if (type.equals(SalgadoAssado.class.getSimpleName())) {
+							produto = new SalgadoAssado(Integer.parseInt(id), name,
+									Double.parseDouble(price));
+						} else if (type.equals(Refresco.class.getSimpleName())) {
+							produto = new Refresco(Integer.parseInt(id), name,
+									Double.parseDouble(price));
+						}
 
-				if (type.equals(SalgadoFrito.class.getSimpleName())) {
-					produto = new SalgadoFrito(Integer.parseInt(id), name, Double.parseDouble(price));
-				} else if (type.equals(SalgadoAssado.class.getSimpleName())) {
-					produto = new SalgadoAssado(Integer.parseInt(id), name, Double.parseDouble(price));
-				} else if (type.equals(Refresco.class.getSimpleName())) {
-					produto = new Refresco(Integer.parseInt(id), name, Double.parseDouble(price));
-				}
+						registraProduto(produto);
+						this.setSequenceProdutoId(Integer.parseInt(id) + 1);
+					});
+		} catch (
 
-				registraProduto(produto);
-			});
-		} catch (IOException e) {
-			e.printStackTrace();
+		Exception e) {
 		}
 	}
 
@@ -70,6 +72,10 @@ public class SingletonDB {
 
 	public Integer getSequenceProdutoId() {
 		return this.sequenceProdutoId++;
+	}
+
+	public void setSequenceProdutoId(Integer sequenceProdutoId) {
+		this.sequenceProdutoId = sequenceProdutoId;
 	}
 
 	public void registraProduto(Produto produto) {
