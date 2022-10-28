@@ -10,42 +10,42 @@ import javax.transaction.Transactional;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
-import com.algaworks.algafood.domain.model.Cozinha;
-import com.algaworks.algafood.domain.repository.CozinhaRepository;
+import com.algaworks.algafood.domain.model.Estado;
+import com.algaworks.algafood.domain.repository.EstadoRepository;
 
 @Component
-public class CozinhaRepositoryIMPL implements CozinhaRepository {
+public class EstadoRepositoryIMPL implements EstadoRepository {
 
 	@PersistenceContext
 	private EntityManager manager;
 	
 	@Override
-	public List<Cozinha> listar() {
-		TypedQuery<Cozinha> cozinhaQuery = manager.createQuery("from Cozinha", Cozinha.class);
-		return cozinhaQuery.getResultList();
+	public List<Estado> listar() {
+		TypedQuery<Estado> estadoQuery = manager.createQuery("from Estado", Estado.class);
+		return estadoQuery.getResultList();
 	}
 	
 	@Override
-	public Cozinha buscar(Long id) {
-		return manager.find(Cozinha.class, id);
+	public Estado buscar(Long id) {
+		return manager.find(Estado.class, id);
 	}
 	
 	@Override
 	@Transactional
-	public Cozinha salvar(Cozinha cozinha) {
-		return manager.merge(cozinha);
+	public Estado salvar(Estado estado) {
+		return manager.merge(estado);
 	}
 	
 	@Override
 	@Transactional
 	public void remover(Long id) {
-		Cozinha cozinha = buscar(id);
+		Estado estado = buscar(id);
 		
-		if(cozinha == null) {
+		if(estado == null) {
 		  throw new EmptyResultDataAccessException(1);
 		}
 		
-		manager.remove(cozinha);;
+		manager.remove(estado);;
 	}
 	
 	
