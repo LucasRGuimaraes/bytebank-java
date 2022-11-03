@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>UltimoDia</name>
+	<name>calculadora-challenger</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1667486105081</id>
+			<id>1667486105089</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
