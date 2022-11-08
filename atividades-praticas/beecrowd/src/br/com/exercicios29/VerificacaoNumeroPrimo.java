@@ -1,6 +1,6 @@
-package br.com.provaThiago;
+package br.com.exercicios29;
 
-public class Exercicio3 {
+public class VerificacaoNumeroPrimo {
 
 	public static void main(String[] args) {
 
@@ -19,5 +19,5 @@ public class Exercicio3 {
 			System.out.println(numero + " não é primo");
 		}
 	}
-
+	
 }
