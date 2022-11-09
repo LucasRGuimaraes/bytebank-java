@@ -1,1 +1,0 @@
-INSERT INTO aluno (id, nome, nota1) VALUES (1, 'ryan', 8);
