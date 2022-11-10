@@ -19,7 +19,7 @@ public class basicoController {
 	
 	@GetMapping
 	public List<Pessoa> listar() {
-		return basicoRepository.findAll();
+		return basicoRepository.listar();
 	}
 	
 }
