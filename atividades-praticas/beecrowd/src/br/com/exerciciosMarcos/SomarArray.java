@@ -17,7 +17,7 @@ public class SomarArray {
 //		Long somatoria = somarArray.somarArray2(array);   // 520ms resultado 5000000050000000
 //		Long somatoria = somarArray.somarArray3(array);   // 430ms resultado 5000000050000000
 //		Long somatoria = somarArray.somarArray4(array);   // 505ms resultado 5000000050000000
-		Long somatoria = somarArray.somarArray5(array);   // 
+		Long somatoria = somarArray.somarArray5(array);   // 000ms retultado 5000000050000000
 		
 		Long tempoFinal = System.currentTimeMillis();
 		
@@ -102,6 +102,11 @@ public class SomarArray {
 	// QUINTO METODO
 	public Long somarArray5(List<Integer> array) {
 		Long somatoria = 0l;
+		
+		Integer primeiroValor = array.get(0);
+		Integer ultimoValor = array.get(array.size() - 1);
+		
+		somatoria = (long) (array.size() / 2) * (primeiroValor + ultimoValor);
 		
 		return somatoria;
 	}
