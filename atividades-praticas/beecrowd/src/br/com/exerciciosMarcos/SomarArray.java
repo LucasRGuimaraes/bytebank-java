@@ -13,20 +13,23 @@ public class SomarArray {
 		
 		Long tempoInicial = System.currentTimeMillis();
 		
-//		Long somatoria = somarArray.somarArray1(array);   // 580ms resultado 5000000050000000
-		Long somatoria = somarArray.somarArray2(array);   //                   2500000100000000
-//		Long somatoria = somarArray.somar3(array);
+//		Long somatoria = somarArray.somarArray1(array);   // 540ms resultado 5000000050000000
+//		Long somatoria = somarArray.somarArray2(array);   // 520ms resultado 5000000050000000
+//		Long somatoria = somarArray.somarArray3(array);   // 430ms resultado 5000000050000000
+//		Long somatoria = somarArray.somarArray4(array);   // 505ms resultado 5000000050000000
+		Long somatoria = somarArray.somarArray5(array);   // 
 		
 		Long tempoFinal = System.currentTimeMillis();
 		
-		Long tempoOperacao = (tempoFinal - tempoInicial) / 1000;
+		Long tempoOperacao = (tempoFinal - tempoInicial);
 		
 		System.out.println("Somatoria foi: " + somatoria );
-		System.out.printf("Em um total de: %,d", tempoOperacao);
-		
+		System.out.printf("Total de: %d milisegundos", tempoOperacao);
 		
 	}
 	
+	
+	// INICIALIZAR ARRAY
 	public List<Integer> inicializarArray(Integer n) {
 		List<Integer> array = new ArrayList<>();
 		
@@ -36,7 +39,9 @@ public class SomarArray {
 		
 		return array;
 	}
+
 	
+	// PRIMEIRO METODO - SOMA SEQUENCIALMENTE DO PRIMEIRO AO ULTIMO
 	public Long somarArray1(List<Integer> array) {
 		Long somatoria = 0l;
 		
@@ -47,12 +52,14 @@ public class SomarArray {
 		return somatoria;
 	}
 	
+	
+	// SEGUNDO METODO - SOMA A PRIMEIRA METADE E DEPOIS A SEGUNDA METADE
 	public Long somarArray2(List<Integer> array) {
 		Long somatoria = 0l;
 		
 		Integer metade = array.size() / 2;
 		
-		for (int i = 0; i < metade / 2; i++) {
+		for (int i = 0; i < metade; i++) {
 			somatoria = somatoria + array.get(i);
 		}
 		
@@ -62,5 +69,42 @@ public class SomarArray {
 		
 		return somatoria;
 	}
+	
+	
+	// TERCEIRO METODO - SOMA O PRIMEIRO COM O ULTIMO, SEGUNDO COM O PENULTIMO, ASSIM POR DIANTE
+	public Long somarArray3(List<Integer> array) {
+		Integer ultimoValor = array.size();
+		Integer primeiroValor = array.get(0);
+		Long somatoria = 0l;
+		
+		for (int i = 1; i <= array.size() / 2; i++) {
+			somatoria = somatoria + primeiroValor + ultimoValor;
+			primeiroValor++;
+			ultimoValor--;
+		}
+		
+		return somatoria;
+	}
+	
+	
+	// QUARTO METODO - SOMA SEQUENCIALEMENTE DO ULTIMO AO PRIMEIRO
+	public Long somarArray4(List<Integer> array) {
+		Long somatoria = 0l;
+		
+		for (int i = array.size() - 1; i >=  0; i--) {
+			somatoria = somatoria + array.get(i);
+		}
+		
+		return somatoria;
+	}
+	
+	
+	// QUINTO METODO
+	public Long somarArray5(List<Integer> array) {
+		Long somatoria = 0l;
+		
+		return somatoria;
+	}
+	
 
 }
