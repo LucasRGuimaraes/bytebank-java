@@ -6,7 +6,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.algaworks.algafood.domain.exception.EstadoNaoEncontradoException;
+import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Cidade;
 import com.algaworks.algafood.domain.repository.CidadeRepository;
 import com.algaworks.algafood.domain.service.CidadeService;
@@ -43,7 +48,12 @@ public class CidadeController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Cidade adicionar(@RequestBody Cidade cidade) {
-    return cidadeService.salvar(cidade);
+    try {
+      return cidadeService.salvar(cidade);
+    
+    } catch (EstadoNaoEncontradoException e) {
+      throw new NegocioException(e.getMessage());
+    }
   }
 
   @PutMapping("/{cidadeId}")
@@ -52,12 +62,22 @@ public class CidadeController {
 
     BeanUtils.copyProperties(cidade, cidadeAtualizada, "id");
 
-    return cidadeService.salvar(cidadeAtualizada);
+    try {
+      return cidadeService.salvar(cidadeAtualizada);
+
+    } catch (EstadoNaoEncontradoException e) {
+      throw new NegocioException(e.getMessage(), e);
+    }
   }
 
   @DeleteMapping("/{cidadeId}")
   public void remover(@PathVariable Long cidadeId) {
     cidadeService.remover(cidadeId);
+  }
+  
+  @ExceptionHandler(EntidadeNaoEncontradaException.class)
+  public ResponseEntity<?> handleEntidadeNaoEncontradaException(EntidadeNaoEncontradaException e) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); 
   }
 
 }

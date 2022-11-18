@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public abstract class EntidadeNaoEncontradaException extends NegocioException{
+public class CozinhaNaoEncontradaException extends EntidadeNaoEncontradaException {
 
-  public EntidadeNaoEncontradaException(String mensagem) {
+  public CozinhaNaoEncontradaException(String mensagem) {
     super(mensagem);
   }
   

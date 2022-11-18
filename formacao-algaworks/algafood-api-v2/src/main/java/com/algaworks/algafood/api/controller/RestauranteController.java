@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algafood.domain.exception.CozinhaNaoEncontradaException;
+import com.algaworks.algafood.domain.exception.EstadoNaoEncontradoException;
+import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import com.algaworks.algafood.domain.service.RestauranteService;
@@ -48,7 +51,11 @@ public class RestauranteController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Restaurante adicionar(@RequestBody Restaurante restaurante) {
-    return restauranteService.salvar(restaurante);
+    try {
+      return restauranteService.salvar(restaurante);
+    } catch (CozinhaNaoEncontradaException e) {
+      throw new NegocioException(e.getMessage(), e);
+    }
   }
 
   @PutMapping("/{restauranteId}")
@@ -58,7 +65,12 @@ public class RestauranteController {
     BeanUtils.copyProperties(restaurante, restauranteAtualizado, "id", "formasPagamento", "endereco",
         "dataCadastro", "produtos");
 
-    return restauranteService.salvar(restauranteAtualizado);
+    try {
+      return restauranteService.salvar(restauranteAtualizado);
+
+    } catch (CozinhaNaoEncontradaException e) {
+      throw new NegocioException(e.getMessage());
+    }
   }
 
   @DeleteMapping("/{restauranteId}")
