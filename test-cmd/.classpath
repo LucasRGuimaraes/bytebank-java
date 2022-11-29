@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/lukas/Downloads/bcprov-jdk15on-1.68.jar"/>
+	<classpathentry kind="lib" path="C:/Users/lukas/Downloads/jscape-9.4.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lucas/Workspace/Github/Java/Estudos/test-cmd/src/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lucas/Workspace/Github/Java/Estudos/test-cmd/src/snmp4j-2.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lucas/Workspace/Github/Java/Estudos/test-cmd/snmp4j-3.7.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

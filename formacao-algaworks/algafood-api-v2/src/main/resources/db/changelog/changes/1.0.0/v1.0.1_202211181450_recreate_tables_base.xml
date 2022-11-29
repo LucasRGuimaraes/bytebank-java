@@ -113,7 +113,6 @@
 			alter table usuario_grupo add constraint grupo_id foreign key (grupo_id) references grupo;
 			
 			alter table usuario_grupo add constraint usuario_id foreign key (usuario_id) references usuario;
-						
 		</sql>
 		<rollback></rollback>
 	</changeSet>

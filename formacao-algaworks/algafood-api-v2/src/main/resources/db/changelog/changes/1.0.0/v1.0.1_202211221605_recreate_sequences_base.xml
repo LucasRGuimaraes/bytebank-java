@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<changeSet id="v1.0.0" author="lucasguimaraes">
+		<comment>Criação de sequences iniciais</comment>
+		<sql>
+			CREATE SEQUENCE cozinha_id_seq START 1 INCREMENT 1;
+			CREATE SEQUENCE restaurante_id_seq START 1 INCREMENT 1;
+			CREATE SEQUENCE estado_id_seq START 1 INCREMENT 1;
+			CREATE SEQUENCE cidade_id_seq START 1 INCREMENT 1;
+			CREATE SEQUENCE forma_pagamento_id_seq START 1 INCREMENT 1;
+			CREATE SEQUENCE permissao_id_seq START 1 INCREMENT 1;
+			CREATE SEQUENCE grupo_id_seq START 1 INCREMENT 1;
+			CREATE SEQUENCE usuario_id_seq START 1 INCREMENT 1;
+			CREATE SEQUENCE produto_id_seq START 2 INCREMENT 1;
+		</sql>
+		<rollback>
+
+		</rollback>
+	</changeSet>	
+	
+</databaseChangeLog>
