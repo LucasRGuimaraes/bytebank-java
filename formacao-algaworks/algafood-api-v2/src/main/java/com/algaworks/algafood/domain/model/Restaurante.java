@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,6 +38,7 @@ public class Restaurante {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotNull
 	@Column(nullable = false)
 	private String nome;
 
@@ -61,7 +63,7 @@ public class Restaurante {
 	private LocalDateTime dataCadastro;
 	
 	@JsonIgnore
-	@Column(nullable = false, columnDefinition = "timestamp")
+	@Column(nullable = true, columnDefinition = "timestamp")
 	private LocalDateTime dataAtualizacao;
 	
 	@JsonIgnore
