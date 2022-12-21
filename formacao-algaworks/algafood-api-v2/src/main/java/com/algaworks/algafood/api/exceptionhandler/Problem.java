@@ -18,19 +18,17 @@ public class Problem {
   private String title;
   private String detail;
   private String type;
-  
+
   private String userMessage;
   private LocalDateTime timestamp;
-  
+
   private List<Field> fields;
-  
+
   @Getter
   @Builder
   public static class Field {
-	  
-	  private String name;
-	  private String userMessage;
-  
+    private String name;
+    private String userMessage;
   }
-  
+
 }
