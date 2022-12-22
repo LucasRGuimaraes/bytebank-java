@@ -1,0 +1,112 @@
+package com.algaworks.algafood;
+
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.test.context.TestPropertySource;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+//@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@TestPropertySource("/application-test.properties")
+public class CadastroCozinhaIT {
+
+	@BeforeAll
+	public static void setUp() {
+		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+		RestAssured.port = 8080;
+		RestAssured.basePath = "/cozinhas";
+	}
+
+	@Test
+	public void deveRetornarStatus200_QuandoConsultarCozinhas() {
+		RestAssured.given()
+				.accept(ContentType.JSON)
+				.when()
+				.get()
+				.then()
+				.statusCode(HttpStatus.OK.value());
+	}
+
+	@Test
+	public void deveConter2Cozinhas_QuandoConsultarCozinhas() {
+		RestAssured.given()
+				.accept(ContentType.JSON)
+				.when()
+				.get()
+				.then()
+				.body("", Matchers.hasSize(2));
+	}
+
+	@Test
+	public void deverRetornarStatus201_QuandoCadastrarCozinha() {
+		RestAssured.given()
+				.body("{ \"nome\": \"Chinesa\" }")
+				.contentType(ContentType.JSON)
+				.accept(ContentType.JSON)
+				.when()
+				.post()
+				.then()
+				.statusCode(HttpStatus.CREATED.value());
+	}
+
+	// ------------------- Integration Tests -------------------
+
+	// @Autowired
+	// private CozinhaService cozinhaService;
+
+	// @Test
+	// @DisplayName("Testa se o cadastro da cozinha esta funcionando")
+	// public void testarCadastroCozinhaComSucesso() {
+	// // cenário
+	// Cozinha novaCozinha = new Cozinha();
+	// novaCozinha.setNome("Chinesa");
+
+	// // ação
+	// novaCozinha = cozinhaService.salvar(novaCozinha);
+
+	// // validação
+	// assertNotNull(novaCozinha);
+	// assertNotNull(novaCozinha.getId());
+	// }
+
+	// @Test()
+	// public void testarCadastrarCozinhaSemNome() {
+	// Cozinha novaCozinha = new Cozinha();
+	// novaCozinha.setNome(null);
+
+	// TransactionSystemException erroEsperado =
+	// Assertions.assertThrows(TransactionSystemException.class, () -> {
+	// cozinhaService.salvar(novaCozinha);
+	// });
+
+	// assertNotNull(erroEsperado);
+	// }
+
+	// @Test
+	// public void deveFalhar_QuandoExcluirCozinhaEmUso() {
+
+	// EntidadeEmUsoException erroEsperado =
+	// Assertions.assertThrows(EntidadeEmUsoException.class, () -> {
+	// cozinhaService.remover(1L);
+	// });
+
+	// assertNotNull(erroEsperado);
+	// }
+
+	// @Test
+	// public void deveFalhar_QuandoExcluirCozinhaInexistente() {
+
+	// CozinhaNaoEncontradaException erroEsperado =
+	// Assertions.assertThrows(CozinhaNaoEncontradaException.class, () -> {
+	// cozinhaService.remover(100L);
+	// });
+
+	// assertNotNull(erroEsperado);
+	// }
+
+}
