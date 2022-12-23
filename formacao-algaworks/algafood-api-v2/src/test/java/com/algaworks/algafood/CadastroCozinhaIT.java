@@ -3,9 +3,14 @@ package com.algaworks.algafood;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
+
+import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.domain.repository.CozinhaRepository;
+import com.algaworks.algafood.util.DatabaseCleaner;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -15,11 +20,20 @@ import io.restassured.http.ContentType;
 @TestPropertySource("/application-test.properties")
 public class CadastroCozinhaIT {
 
+	@Autowired
+	private static DatabaseCleaner databaseCleaner;
+
+	@Autowired
+	private static CozinhaRepository cozinhaRepository;
+
 	@BeforeAll
 	public static void setUp() {
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 		RestAssured.port = 8080;
 		RestAssured.basePath = "/cozinhas";
+
+		databaseCleaner.clearTables();
+		prepararDados();
 	}
 
 	@Test
@@ -52,6 +66,16 @@ public class CadastroCozinhaIT {
 				.post()
 				.then()
 				.statusCode(HttpStatus.CREATED.value());
+	}
+
+	private static void prepararDados() {
+		Cozinha cozinha1 = new Cozinha();
+		cozinha1.setNome("Tailandesa");
+		cozinhaRepository.save(cozinha1);
+
+		Cozinha cozinha2 = new Cozinha();
+		cozinha1.setNome("Americana");
+		cozinhaRepository.save(cozinha2);
 	}
 
 	// ------------------- Integration Tests -------------------
