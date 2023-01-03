@@ -1,6 +1,6 @@
 package com.algaworks.algafood.domain.model;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class Usuario {
   
   @JsonIgnore
   @Column(nullable = false, columnDefinition = "timestamp")
-  private LocalDateTime dataCadastro;
+  private OffsetDateTime dataCadastro;
   
   @JsonIgnore
   @ManyToMany
@@ -51,7 +51,7 @@ public class Usuario {
   
   @PrePersist
   private void prePersistent() {
-    this.dataCadastro = LocalDateTime.now();
+    this.dataCadastro = OffsetDateTime.now();
   }
   
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<changeSet id="v1.0.1" author="lucasguimaraes">
+		<comment>Adicionada coluna aitvo na tabela restaurante</comment>
+		<sql> 
+			ALTER TABLE restaurante ADD COLUMN ativo BOOLEAN DEFAULT true NOT NULL; 
+			ALTER TABLE restaurante ALTER COLUMN ativo DROP DEFAULT 
+		</sql>
+		<rollback> 
+
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>
