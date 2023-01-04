@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,16 +24,12 @@ public class Grupo {
   @EqualsAndHashCode.Include
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
-  
 
   @Column(nullable = false)
   private String nome;
-  
-  @JsonIgnore
+
   @ManyToMany
-  @JoinTable(name = "grupo_permissao", 
-        joinColumns = @JoinColumn(name = "grupo_id"),
-        inverseJoinColumns = @JoinColumn(name = "permissao_id"))
+  @JoinTable(name = "grupo_permissao", joinColumns = @JoinColumn(name = "grupo_id"), inverseJoinColumns = @JoinColumn(name = "permissao_id"))
   private List<Permissao> permissoes = new ArrayList<>();
-  
+
 }
