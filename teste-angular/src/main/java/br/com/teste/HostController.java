@@ -1,4 +1,4 @@
-package br.com.basico.controller;
+package br.com.teste;
 
 import java.util.List;
 
@@ -7,19 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.basico.model.Pessoa;
-import br.com.basico.repository.BasicoRepository;
 
 @RestController
-@RequestMapping("/basico")
-public class BasicoController {
+@RequestMapping("/host")
+public class HostController {
 	
 	@Autowired
-	private BasicoRepository basicoRepository;
+	private HostRepository hostRepository;
 	
 	@GetMapping
-	public List<Pessoa> listar() {
-		return basicoRepository.listar();
+	public List<Host> listar() {
+		return hostRepository.findAll();
 	}
 	
 }
