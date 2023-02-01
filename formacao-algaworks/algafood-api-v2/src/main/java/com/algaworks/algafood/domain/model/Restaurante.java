@@ -2,9 +2,7 @@ package com.algaworks.algafood.domain.model;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -53,8 +51,10 @@ public class Restaurante {
 
 	private Boolean ativo = Boolean.TRUE;
 
+	private Boolean aberto = Boolean.TRUE;
+
 	@OneToMany(mappedBy = "restaurante")
-	private List<Produto> produtos = new ArrayList<>();
+	private Set<Produto> produtos = new HashSet<>();
 
 	@Column(nullable = false, columnDefinition = "timestamp")
 	private OffsetDateTime dataCadastro;
@@ -83,6 +83,14 @@ public class Restaurante {
 
 	public void desativar() {
 		setAtivo(false);
+	}
+
+	public void abrir() {
+		setAberto(true);
+	}
+
+	public void fechar() {
+		setAberto(false);
 	}
 
 	public boolean adicionarFormaPagamento(FormaPagamento formaPagamento) {

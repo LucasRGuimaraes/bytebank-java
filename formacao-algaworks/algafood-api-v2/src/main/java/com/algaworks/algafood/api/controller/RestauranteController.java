@@ -60,10 +60,10 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteInputDisassembler restauranteInputDisassembler;
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping
 	public List<RestauranteDTO> listar() {
 		List<Restaurante> restaurantes = restauranteRepository.findAll();
-		return restauranteDTOAssembler.toCollectionDTO(restaurantes);
+		return restauranteDTOAssembler.toCollectionDTO(restaurantes); 
 	}
 
 	@GetMapping("/{restauranteId}")
@@ -112,6 +112,18 @@ public class RestauranteController {
 		restauranteService.desativar(restauranteId);
 	}
 
+	@PutMapping("/{restauranteId}/abertura")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void abrir(@PathVariable Long restauranteId) {
+		restauranteService.abrir(restauranteId);
+	}
+
+	@PutMapping("/{restauranteId}/fechamento")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void fechar(@PathVariable Long restauranteId) {
+		restauranteService.fechar(restauranteId);
+	}
+
 	@PatchMapping("/{restauranteId}")
 	public RestauranteDTO atualizarParcial(@PathVariable Long restauranteId, @RequestBody Map<String, Object> campos,
 			HttpServletRequest request) {
@@ -157,7 +169,10 @@ public class RestauranteController {
 
 			camposOrigem.forEach((nomePropriedade, valorPropriedade) -> {
 				Field field = ReflectionUtils.findField(Restaurante.class, nomePropriedade);
-				field.setAccessible(true);
+
+				if (field != null) {
+					field.setAccessible(true);
+				}
 
 				Object novoValor = ReflectionUtils.getField(field, restauranteOrigem);
 

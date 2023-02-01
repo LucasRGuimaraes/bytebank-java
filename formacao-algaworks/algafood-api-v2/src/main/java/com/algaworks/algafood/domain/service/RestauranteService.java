@@ -66,6 +66,18 @@ public class RestauranteService {
   }
 
   @Transactional
+  public void abrir(Long restauranteId) {
+    Restaurante restauranteAtual = findOrFailure(restauranteId);
+    restauranteAtual.abrir();
+  }
+
+  @Transactional
+  public void fechar(Long restauranteId) {
+    Restaurante restauranteAtual = findOrFailure(restauranteId);
+    restauranteAtual.fechar();
+  }
+
+  @Transactional
   public void associarFormaPagamento(Long restauranteId, Long formaPagamentoId) {
     Restaurante restaurante = findOrFailure(restauranteId);
     FormaPagamento formaPagamento = formaPagamentoService.findOrFailure(formaPagamentoId);

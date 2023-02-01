@@ -30,22 +30,19 @@ public class RestauranteFormaPagamentoController {
 	@GetMapping
 	public List<FormaPagamentoDTO> listar(@PathVariable Long restauranteId) {
 		Restaurante restaurante = restauranteService.findOrFailure(restauranteId);
-
 		return formaPagamentoDTOAssembler.toCollectionDTO(restaurante.getFormasPagamento());
 	}
 
 	@PutMapping("/{formaPagamentoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void associar(@PathVariable Long restauranteId, @PathVariable Long formaPagamentoId){
+	public void associar(@PathVariable Long restauranteId, @PathVariable Long formaPagamentoId) {
 		restauranteService.associarFormaPagamento(restauranteId, formaPagamentoId);
 	}
 
-
 	@DeleteMapping("/{formaPagamentoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void desassociar(@PathVariable Long restauranteId, @PathVariable Long formaPagamentoId){
+	public void desassociar(@PathVariable Long restauranteId, @PathVariable Long formaPagamentoId) {
 		restauranteService.desassociarFormaPagamento(restauranteId, formaPagamentoId);
 	}
-
 
 }
