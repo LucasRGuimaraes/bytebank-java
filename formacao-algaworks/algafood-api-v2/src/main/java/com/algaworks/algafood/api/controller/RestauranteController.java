@@ -11,7 +11,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.ReflectionUtils;
@@ -32,12 +31,15 @@ import com.algaworks.algafood.api.assembler.RestauranteDTOAssembler;
 import com.algaworks.algafood.api.assembler.disassembler.RestauranteInputDisassembler;
 import com.algaworks.algafood.api.model.dto.RestauranteDTO;
 import com.algaworks.algafood.api.model.input.RestauranteInput;
+import com.algaworks.algafood.api.model.view.RestauranteView;
 import com.algaworks.algafood.core.validation.ValidacaoException;
 import com.algaworks.algafood.domain.exception.CozinhaNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
+import com.algaworks.algafood.domain.exception.RestauranteNaoEncontradoException;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import com.algaworks.algafood.domain.service.RestauranteService;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -60,11 +62,39 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteInputDisassembler restauranteInputDisassembler;
 
+	@JsonView(RestauranteView.Resumo.class)
 	@GetMapping
 	public List<RestauranteDTO> listar() {
 		List<Restaurante> restaurantes = restauranteRepository.findAll();
-		return restauranteDTOAssembler.toCollectionDTO(restaurantes); 
+		return restauranteDTOAssembler.toCollectionDTO(restaurantes);
 	}
+
+	@JsonView(RestauranteView.ApenasNome.class)
+	@GetMapping(params = "projecao=apenas-nome")
+	public List<RestauranteDTO> listarApenasNomes() {
+		return listar();
+	}
+
+	// @GetMapping
+	// public MappingJacksonValue listar(@RequestParam(required = false) String
+	// projecao) {
+	// List<Restaurante> restaurantes = restauranteRepository.findAll();
+	// List<RestauranteModel> restaurantesModel =
+	// restauranteModelAssembler.toCollectionModel(restaurantes);
+	//
+	// MappingJacksonValue restaurantesWrapper = new
+	// MappingJacksonValue(restaurantesModel);
+	//
+	// restaurantesWrapper.setSerializationView(RestauranteView.Resumo.class);
+	//
+	// if ("apenas-nome".equals(projecao)) {
+	// restaurantesWrapper.setSerializationView(RestauranteView.ApenasNome.class);
+	// } else if ("completo".equals(projecao)) {
+	// restaurantesWrapper.setSerializationView(null);
+	// }
+	//
+	// return restaurantesWrapper;
+	// }
 
 	@GetMapping("/{restauranteId}")
 	public RestauranteDTO buscar(@PathVariable Long restauranteId) {
@@ -106,10 +136,30 @@ public class RestauranteController {
 		restauranteService.ativar(restauranteId);
 	}
 
+	@PutMapping("/ativacoes")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void ativarMultiplos(@RequestBody List<Long> restauranteIds) {
+		try {
+			restauranteService.ativar(restauranteIds);
+		} catch (RestauranteNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
+	}
+
 	@DeleteMapping("/{restauranteId}/ativo")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void desativar(@PathVariable Long restauranteId) {
 		restauranteService.desativar(restauranteId);
+	}
+
+	@DeleteMapping("/ativacoes")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void desativarMultiplos(@RequestBody List<Long> restauranteIds) {
+		try {
+			restauranteService.desativar(restauranteIds);
+		} catch (RestauranteNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
 	}
 
 	@PutMapping("/{restauranteId}/abertura")

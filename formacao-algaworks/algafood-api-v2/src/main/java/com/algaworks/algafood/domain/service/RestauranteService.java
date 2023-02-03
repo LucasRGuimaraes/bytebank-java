@@ -1,5 +1,7 @@
 package com.algaworks.algafood.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,6 +13,7 @@ import com.algaworks.algafood.domain.exception.RestauranteNaoEncontradoException
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.model.FormaPagamento;
 import com.algaworks.algafood.domain.model.Restaurante;
+import com.algaworks.algafood.domain.model.Usuario;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
 
 @Service
@@ -26,6 +29,9 @@ public class RestauranteService {
 
   @Autowired
   private FormaPagamentoService formaPagamentoService;
+
+  @Autowired
+  private UsuarioService usuarioService;
 
   @Transactional
   public Restaurante salvar(Restaurante restaurante) {
@@ -60,9 +66,19 @@ public class RestauranteService {
   }
 
   @Transactional
+  public void ativar(List<Long> restauranteIds) {
+    restauranteIds.forEach(this::ativar);
+  }
+
+  @Transactional
   public void desativar(Long restauranteId) {
     Restaurante restauranteAtual = findOrFailure(restauranteId);
     restauranteAtual.desativar();
+  }
+
+  @Transactional
+  public void desativar(List<Long> restauranteIds) {
+    restauranteIds.forEach(this::desativar);
   }
 
   @Transactional
@@ -91,6 +107,22 @@ public class RestauranteService {
     FormaPagamento formaPagamento = formaPagamentoService.findOrFailure(formaPagamentoId);
 
     restaurante.removerFormaPagamento(formaPagamento);
+  }
+
+  @Transactional
+  public void associarUsuario(Long restauranteId, Long UsuarioId) {
+    Restaurante restaurante = findOrFailure(restauranteId);
+    Usuario usuario = usuarioService.findOrFailure(UsuarioId);
+
+    restaurante.adicionarUsuarioResponsavel(usuario);
+  }
+
+  @Transactional
+  public void desassociarUsuario(Long restauranteId, Long usuarioId) {
+    Restaurante restaurante = findOrFailure(restauranteId);
+    Usuario usuario = usuarioService.findOrFailure(usuarioId);
+
+    restaurante.removerUsuarioResponsavel(usuario);
   }
 
   public Restaurante findOrFailure(Long restauranteId) {

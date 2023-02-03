@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<changeSet id="v1.0.2" author="lucasguimaraes">
+		<comment>Adicionada tabela de relacionamento entre resturante e usuarios</comment>
+		<sql> 
+			create table restaurante_usuario_responsavel (
+			  restaurante_id bigint not null, 
+			  usuario_id bigint not null
+			);
+
+			alter table restaurante_usuario_responsavel add constraint usuario_id foreign key (usuario_id) references usuario;
+			alter table restaurante_usuario_responsavel add constraint restaurante_id foreign key (restaurante_id) references restaurante;
+		</sql>
+		<rollback> 
+
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>

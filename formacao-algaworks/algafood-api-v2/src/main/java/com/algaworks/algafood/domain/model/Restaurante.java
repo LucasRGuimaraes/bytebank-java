@@ -66,6 +66,10 @@ public class Restaurante {
 	@JoinTable(name = "restaurante_forma_pagamento", joinColumns = @JoinColumn(name = "restaurante_id"), inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
 	private Set<FormaPagamento> formasPagamento = new HashSet<>();
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "restaurante_usuario_responsavel", joinColumns = @JoinColumn(name = "restaurante_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+	private Set<Usuario> usuarios = new HashSet<>();
+
 	@PrePersist
 	private void prePersistent() {
 		this.dataCadastro = OffsetDateTime.now();
@@ -99,6 +103,14 @@ public class Restaurante {
 
 	public boolean removerFormaPagamento(FormaPagamento formaPagamento) {
 		return getFormasPagamento().remove(formaPagamento);
+	}
+
+	public boolean adicionarUsuarioResponsavel(Usuario usuario) {
+		return getUsuarios().add(usuario);
+	}
+
+	public boolean removerUsuarioResponsavel(Usuario usuario) {
+		return getUsuarios().remove(usuario);
 	}
 
 }
