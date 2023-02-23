@@ -1,0 +1,43 @@
+@SCRIPT   : SPSD2AGE
+@VERSION  : 0.00-0
+@ELEMENT  : SPSABC
+@C-NUMBER : 628094411
+@TYPE     : CMG
+@SW_VER   : Nokia,Active,TiMOS-MG-C-10.0.R17-1,TiMOS-MG-C-10.0.R17-1,TiMOS-MG-C-10.0.R17-1
+@DATE     : 2023-02-08
+@TIME     : 13:19:59
+@START
+@TAG      : ALARM_HISTORY_START
+
+ Alarm Serial No      Sync No  Parent Serial No  Subnet ID  Managed Element ID  1Managed Element Type  Alarm ID  Alarm Name                                    
+     
+ 60510112312313133131 1210163  0                 0          33                  S   P    S             20088                           
+ 605127               1210189  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605129               1210191  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605130               1210192  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605131               1210193  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605105               1210167  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605106               1210168  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605107               1210169  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605108               1210170  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605128               1210190  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605109               1210171  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605110               1210172  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605111               1210173  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605100               1210162  0                 0          33                  SPS                    20087     MTP Linkset Fault                             
+ 605113               1210175  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605120               1210182  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605116               1210178  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605124               1210186  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605119               1210181  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605122               1210184  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605118               1210180  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605112               1210174  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605125               1210187  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605117               1210179  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+ 605121               1210183  0                 0          33                  SPS                    20088     MTP Route Unavailable                         
+(Number of results = 38)
+
+@TAG      : ALARM_HISTORY_END
+
+@END
